@@ -17,7 +17,7 @@ export class RootService {
 
 
 
-    getAllUsers() : Observable<any> {
+    getAllUsers(): Observable<any> {
         return this.http.get<any>(
             `https://localhost:44369/api/users`);
 
@@ -35,5 +35,15 @@ export class RootService {
             `https://localhost:44369/api/users/` + x);
     }
 
+    getAllPackets(): Observable<any> {
+        return this.http.get<any>(
+            `https://localhost:44369/api/packets`);
+    }
+
+    getAllPacketsAndFilter(filter): Observable<any> {
+
+        return this.http.get<any>(
+            'https://localhost:44369/api/packets?filter=' + filter);
+    }
  
 }

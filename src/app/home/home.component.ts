@@ -27,6 +27,11 @@ export class HomeComponent implements OnInit {
   // console.log(result);
   }
 
+  packetsManagement(){
+    this.router.navigate(['/packets'])
+    
+    }
+
   logout(){
     this.authService.logout();
     this.router.navigate(['/login']);

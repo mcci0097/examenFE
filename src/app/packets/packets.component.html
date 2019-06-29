@@ -1,0 +1,160 @@
+<div>
+  <form class="filter-form">
+    <mat-form-field class="filter-full-width">
+       <input matInput placeholder="Filter" #filter>
+    </mat-form-field>
+    <button id="filter" (click)="filterPackets(filter.value)" mat-raised-button class="login-btn" color="primary">
+      Filter
+    </button>
+  </form>
+</div>
+
+<!-- <div>
+  <form class="filter-form">
+    <button id="filter" (click)="sort()" mat-raised-button class="login-btn" color="primary">
+      Sorterinho
+    </button>
+  </form>
+</div> -->
+
+<!-- <mat-form-field>
+  <input matInput [min]="minDate" [max]="maxDate" [formControl]="startDate" [matDatepicker]="picker" placeholder="Choose a start date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker1 startView="year" [startAt]="minDate"></mat-datepicker>
+</mat-form-field> -->
+
+<!-- <mat-form-field>
+  <input matInput [min]="startDate" [max]="maxDate" [formControl]="endDate" [matDatepicker]="picker" placeholder="Choose a date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker2 startView="year" [startAt]="startDate"></mat-datepicker>
+</mat-form-field> -->
+
+<table *ngIf ="packets != null" mat-table [dataSource]="packets" class="mat-elevation-z8">
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Title Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="countryOrigin">
+    <th mat-header-cell *matHeaderCellDef> countryOrigin </th>
+    <td mat-cell *matCellDef="let element"> {{element.countryOrigin}} </td>
+  </ng-container>
+
+  <!-- Added Column -->
+  <ng-container matColumnDef="sender">
+    <th mat-header-cell *matHeaderCellDef> sender </th>
+    <td mat-cell *matCellDef="let element"> {{element.sender}} </td>
+  </ng-container>
+
+  <!-- Deadline Column -->
+  <ng-container matColumnDef="countryDestination">
+    <th mat-header-cell *matHeaderCellDef> countryDestination </th>
+    <td mat-cell *matCellDef="let element"> {{element.countryDestination}} </td>
+  </ng-container>
+
+   <!-- NumberOfComments Column -->
+   <ng-container matColumnDef="addressDestination">
+    <th mat-header-cell *matHeaderCellDef> addressDestination </th>
+    <td mat-cell *matCellDef="let element"> {{element.addressDestination}} </td>
+  </ng-container>
+
+   <!-- CloseAt Column -->
+   <ng-container matColumnDef="cost">
+    <th mat-header-cell *matHeaderCellDef> cost </th>
+    <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
+  </ng-container>
+
+    <!-- Importance Column -->
+    <ng-container matColumnDef="awb">
+      <th mat-header-cell *matHeaderCellDef> awb </th>
+      <td mat-cell *matCellDef="let element"> {{element.awb}} </td>
+    </ng-container>
+    
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<!-- <mat-accordion>
+  <mat-expansion-panel [expanded]='sendersPanel' [disabled]='!packetsPanel'>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Senders</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <table mat-table [dataSource]="users" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Username </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="userRole">
+          <th mat-header-cell *matHeaderCellDef> UserRole </th>
+          <td mat-cell *matCellDef="let element"> {{element.userRole}} </td>
+        </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> History </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button color="primary" (click)='showHistory(element.id)'> Show History
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]='historyPanel' [disabled]='!historyPanel'>
+    <mat-expansion-panel-header>
+      <mat-panel-title>History for selected user</mat-panel-title>
+    </mat-expansion-panel-header>  
+        
+        <table mat-table [dataSource]="history" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef> Username </th>
+            <td mat-cell *matCellDef="let history"> {{history.username}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="userRoleName">
+            <th mat-header-cell *matHeaderCellDef> RoleName </th>
+            <td mat-cell *matCellDef="let history"> {{history.userRoleName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="startTime">
+            <th mat-header-cell *matHeaderCellDef> StartTime </th>
+            <td mat-cell *matCellDef="let history"> {{history.startTime | date:'dd/MM/yyyy HH:MM:ss'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="endTime">
+              <th mat-header-cell *matHeaderCellDef> EndTime </th>
+              <td mat-cell *matCellDef="let history"> {{history.endTime | date:'dd/MM/yyyy HH:MM:ss'}} </td>
+            </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsHistory"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsHistory;"></tr>
+        </table>    
+    <br>
+    <div style="margin: auto">    
+      <button mat-raised-button color="primary" style="margin: 30px" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+ -->

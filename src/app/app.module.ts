@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsersComponent } from './users/users.component';
+import { PacketsComponent } from './packets/packets.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UsersComponent } from './users/users.component';
     HomeComponent,
     UsersComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PacketsComponent,
   ],
   imports: [
     BrowserModule,
